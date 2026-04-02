@@ -41,7 +41,7 @@ html {
   --s: 0.5em;
   box-sizing: border-box;
   padding: var(--s);
-  height: 90svh;
+  height: 100dvh;
   container-type: size;
   color-scheme: light;
 }
