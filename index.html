@@ -6,33 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitation</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" as="image" href="assets/jodi_pose.jpeg" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/large-jpg/sweet90sj.jpg" fetchpriority="high">
 </head>
 
 <body>
     <div class="scroll-container">
         <div class="grid">
-            <div class="image">
-                <img src="assets/bhais.jpeg" alt="" loading="lazy">
-            </div>
-            <div class="image">
-                <img src="assets/boys_wide.jpeg" alt="" loading="lazy">
-            </div>
-            <div class="image">
-                <img src="assets/mama.jpeg" alt="" loading="lazy">
-            </div>
-            <div class="image" style="--img:url('assets/jodi_pose.jpeg')">
-                <img id="jodino1" src="assets/jodino1.jpeg" alt="" fetchpriority="high" decoding="async">
-            </div>
-            <div class="image">
-                <img src="assets/matee.jpeg" alt="" loading="lazy">
-            </div>
-            <div class="image">
-                <img src="assets/ladies.jpeg" alt="" loading="lazy">
-            </div>
-            <div class="image">
-                <img src="assets/la_familia.jpeg" alt="" loading="lazy">
-            </div>
+            <figure class="image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="assets/thumb-webp/brotha0fdestrucion.webp"
+                        type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/brotha0fdestrucion.jpg"
+                        type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/brotha0fdestrucion.webp"
+                        type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/brotha0fdestrucion.jpg"
+                        type="image/jpeg">
+                    <img src="assets/large-jpg/brotha0fdestrucion.jpg" alt="The brothers together" loading="lazy"
+                        decoding="async">
+                </picture>
+            </figure>
+
+            <figure class="image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="assets/thumb-webp/familyxl.webp" type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/familyxl.jpg" type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/familyxl.webp" type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/familyxl.jpg" type="image/jpeg">
+                    <img src="assets/large-jpg/familyxl.jpg" alt="Wide shot of the boys" loading="lazy"
+                        decoding="async">
+                </picture>
+            </figure>
+
+            <figure class=" image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="assets/thumb-webp/mama.webp" type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/mama.jpg" type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/mama.webp" type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/mama.jpg" type="image/jpeg">
+                    <img src="assets/large-jpg/mama.jpg" alt="Portrait of Mama" loading="lazy" decoding="async">
+                </picture>
+            </figure>
+
+            <figure class=" image" style="--img:url('../assets/large-jpg/sweet90sj.jpg')">
+                <picture>
+                    <!-- <source media="(max-width: 767px)" srcset="assets/thumb-webp/posez.webp" type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/posez.jpg" type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/posez.webp" type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/posez.jpg" type="image/jpeg"> -->
+                    <img id="jodino1" src="assets/large-jpg/posez.jpg" alt="The lovely couple" fetchpriority="high"
+                        decoding="async">
+                </picture>
+            </figure>
+
+            <figure class="image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="assets/thumb-webp/sass.webp" type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/sass.jpg" type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/sass.webp" type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/sass.jpg" type="image/jpeg">
+                    <img src="assets/large-jpg/sass.jpg" alt=" posing" loading="lazy" decoding="async">
+                </picture>
+            </figure>
+
+            <figure class="image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="assets/thumb-webp/gentlemen.webp" type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/gentlemen.jpg" type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/gentlemen.webp" type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/gentlemen.jpg" type="image/jpeg">
+                    <img src="assets/large-jpg/gentlemen.jpg" alt="The ladies group photo" loading="lazy"
+                        decoding="async">
+                </picture>
+            </figure>
+
+            <figure class="image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="assets/thumb-webp/family_candid.webp" type="image/webp">
+                    <source media="(max-width: 767px)" srcset="assets/thumb-jpg/family_candid.jpg" type="image/jpeg">
+                    <source media="(min-width: 768px)" srcset="assets/large-webp/family_candid.webp" type="image/webp">
+                    <source media="(min-width: 768px)" srcset="assets/large-jpg/family_candid.jpg" type="image/jpeg">
+                    <img src="assets/large-jpg/family_candid.jpg" alt="The whole family together" loading="lazy"
+                        decoding="async">
+                </picture>
+            </figure>
         </div>
     </div>
     <section>
