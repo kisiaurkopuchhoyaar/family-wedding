@@ -54,6 +54,12 @@
     curve to 73.97% 12.4% with 92.11% 20.66% / 83.99% 12.4%,
     close
   );
+  --root-color: #74e721;
+  --start-stop: 7.5;
+  --end-stop: 5.6;
+  --opa-start-pct: 60;
+  --opa-mid-pct: 20;
+  --opa-end-pct: 55;
   color-scheme: light;
   interpolate-size: allow-keywords;
 }
@@ -242,48 +248,6 @@ body {
   /* test if I can fit 2 columns & a gap */
   --sgn: sign(100cqw - 2 * var(--u) - var(--s));
   --n: round(up, 0.5 * (var(--sgn) + 1) + 1);
-  background: linear-gradient(
-    in oklab,
-    oklch(90% 0.16 360) 0%,
-    oklch(95% 0.08 87) 100%
-  );
-
-  min-height: 100svh;
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background-image:
-      repeating-linear-gradient(
-        92deg,
-        rgba(120, 70, 10, 0.07) 0px,
-        rgba(120, 70, 10, 0.07) 1px,
-        transparent 1px,
-        transparent 60px
-      ),
-      repeating-linear-gradient(
-        2deg,
-        rgba(100, 55, 5, 0.06) 0px,
-        rgba(100, 55, 5, 0.06) 1px,
-        transparent 1px,
-        transparent 44px
-      );
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse at 50% 50%,
-      transparent 35%,
-      rgba(50, 20, 2, 0.55) 100%
-    );
-  }
 }
 .visually-hidden {
   position: absolute;
@@ -297,8 +261,6 @@ body {
   border: 0;
 }
 .scroll-container {
-  z-index: 3;
-
   width: clamp(min(97.75vw, 50ch), 70vw, 125ch);
   margin: 0 auto;
   height: 400svh;
@@ -389,6 +351,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 99vw;
+  overflow: clip;
   height: 100svh;
   scroll-snap-align: center;
 
@@ -396,4 +360,197 @@ section {
   place-self: center;
 }
 .wedding-announcement {
+  padding: 0.3em max(1em, 50cqw - 800px/2);
+  --r: 5px;
+  --o: calc(-1 * var(--r));
+  --back-c: light-dark(#ededed, #121212);
+  --line-c: grey;
+  border: solid 2em #0000;
+  background:
+    radial-gradient(
+        var(--r) at var(--r) var(--r),
+        var(--back-c) calc(100% - 2px),
+        var(--line-c) calc(100% - 1px),
+        #0000
+      )
+      var(--o) var(--o),
+    conic-gradient(from 90deg at 1px 1px, #0000 25%, var(--line-c) 0%);
+}
+.announcement-container {
+  /*   background-image: var(--gradient-28); */
+
+  display: grid;
+
+  /*   backdrop-filter:blur(8px); */
+  padding: 2em;
+  gap: 1ch;
+}
+.save-the-date {
+  text-align: center;
+  font-family: "GiornataRegular";
+  font-weight: bold;
+  font-size: clamp(0.8rem, 4vw, 1.8rem);
+  color: oklch(0.22 0.0296 352.06);
+}
+.couple-names {
+  font-family: "Cinzel", serif;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #1a1410;
+  place-self: center;
+  text-align: center;
+}
+.ampersand {
+  display: block;
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(3rem, 11vw, 8rem);
+  color: oklch(0.6971 0.1425 86.29);
+  line-height: 1;
+  margin: -0.1em 0;
+}
+/* p.venue{
+  place-self:center;
+  width:fit-content;
+  padding-block:0.3em;
+  padding-inline:0.4em;
+  font-family:'Century Gothic', sans-serif;
+  background:wheat;
+  border:0.1vmin solid black;
+  border-radius:5em;
+  corner-shape:round;
+  text-align:center;
+  
+} */
+.message {
+  font-size: clamp(1.1rem, 3vw, 1.45rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  text-wrap: balance;
+  text-align: center;
+}
+.date-time {
+  font-family: "Mansalva", sans-serif;
+  position: relative;
+  width: fit-content;
+  place-self: center;
+  padding: 1em;
+  z-index: 5;
+
+  font-weight: 800;
+  &:before {
+    rotate: 0.5deg;
+    transform: skew(5deg);
+    --mark-color: var(--root-color);
+    --mark-bg-angle: 50deg;
+    filter: url(#squiggly-6);
+    --mark-color: oklch(71.337% 0.18696 350.838);
+    content: "";
+    position: absolute;
+    inset: 10px -2px;
+    top: 2px;
+    z-index: -1;
+    border-radius: 3px 5px 3px 5px;
+    background:
+      conic-gradient(
+          at 0 100%,
+          oklch(from var(--mark-color) l c h / 100%) 1%,
+          #fff0 calc(1% * var(--start-stop))
+        )
+        no-repeat 0 0 / auto 120%,
+      conic-gradient(
+          from 180deg at 100% 0,
+          #fff0,
+          oklch(from var(--mark-color) l c h / 100%) 1%,
+          #fff0 calc(1% * var(--end-stop))
+        )
+        no-repeat 100% 100% / auto 120%,
+      linear-gradient(
+          var(--mark-bg-angle),
+          oklch(from var(--mark-color) l c h / calc(1% * var(--opa-start-pct))),
+          oklch(from var(--mark-color) l c h / calc(1% * var(--opa-mid-pct)))
+            75%,
+          oklch(from var(--mark-color) l c h / calc(1% * var(--opa-end-pct)))
+        )
+        no-repeat center / auto;
+  }
+}
+.divider {
+  display: flex;
+  align-items: center;
+  flex: 1;
+
+  width: 100%;
+
+  margin-block: 1em;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent var(--g, 20%),
+    deeppink,
+    transparent var(--d, 80%)
+  );
+  animation: --ani 2s infinite ease-in-out;
+}
+
+@keyframes --ani {
+  50% {
+    --g: 30%;
+    --d: 70%;
+  }
+}
+.reveal {
+  /* Create View Timeline */
+  view-timeline-name: --reveal-text;
+  view-timeline-axis: block;
+
+  /* Attach animation, linked to the  View Timeline */
+  animation: linear revealText both;
+  animation-timeline: --reveal-text;
+  animation-duration: 1ms; /* Firefox requires this to apply the animation */
+
+  /* Tweak range when effect should run*/
+  animation-range: 10% 30%;
+}
+.reveal:nth-child(odd) {
+  animation: linear revealTextOdd both;
+  animation-timeline: --reveal-text;
+  animation-duration: 1ms; /* Firefox requires this to apply the animation */
+
+  /* Tweak range when effect should run*/
+  animation-range: 5% 30%;
+
+  transform-origin: center;
+}
+
+@keyframes revealText {
+  from {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%) scaleX(1);
+  }
+}
+
+@keyframes revealTextOdd {
+  from {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%) scaleX(1);
+  }
 }
