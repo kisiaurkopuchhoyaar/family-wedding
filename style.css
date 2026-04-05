@@ -297,7 +297,8 @@ body {
   border: 0;
 }
 .scroll-container {
-  isolation: isolate;
+  z-index: 3;
+
   width: clamp(min(97.75vw, 50ch), 70vw, 125ch);
   margin: 0 auto;
   height: 400svh;
