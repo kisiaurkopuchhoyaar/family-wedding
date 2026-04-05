@@ -6,10 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitation</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap&amp;subset=latin">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Tenor+Sans&family=Cinzel:wght@400;500&display=swap"
+        rel="stylesheet" />
     <link rel="preload" as="image" href="assets/large-jpg/sweet90sj.jpg" fetchpriority="high">
 </head>
 
 <body>
+    <svg id="svgfilters" height="0" style="width: 0; height: 0;" viewBox="0 0 1400 1400"
+        xmlns="http://www.w3.org/2000/svg" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+
+        <filter id="squiggly-6">
+            <feturbulence basefrequency="0.16" id="turbulence-1" numoctaves="2.3" result="noise" seed="100">
+            </feturbulence>
+            <feColorMatrix type="matrix" values="
+                                           0 0 0 0 0
+                                           0 1 0 0 0 
+                                           0 0 0 0 0 
+                                           0 0 0 1 0" result="texture2" />
+
+            <fedisplacementmap in2="noise" in="SourceGraphic" scale="15"></fedisplacementmap>
+        </filter>
+    </svg>
     <div class="scroll-container">
         <div class="grid">
             <figure class="image">
@@ -92,10 +112,50 @@
             </figure>
         </div>
     </div>
-    <section>
-        <h1>
-            Hey, wat cool!
-        </h1>
+    <section class="wedding-announcement" aria-labelledby="wedding-title">
+
+        <div class="announcement-container">
+
+            <!-- Accessible heading for screen readers -->
+            <h1 id="wedding-title" class="visually-hidden">
+                Abhishek &amp; Komal are getting married on April 23, 2026
+            </h1>
+
+            <p class="save-the-date">Save the date</p>
+
+            <!-- Hero couple names with modern typography -->
+            <div class="couple-names">
+                <span class="name" aria-hidden="true">Abhishek</span>
+                <span class="ampersand" aria-hidden="true">&amp;</span>
+                <span class="name" aria-hidden="true">Komal</span>
+            </div>
+
+            <!-- Date & time – using &lt;time&gt; for semantics -->
+            <time class="date-time" datetime="2026-04-20T16:00">
+                Saturday, April 21, 2026
+            </time>
+
+            <!-- Venue -->
+            <!--             <p class="venue">
+                Goreakothi • Siwan, Bihar
+            </p> -->
+
+            <!-- Elegant divider with heart symbol -->
+            <div class="divider" aria-hidden="true">
+                <span></span>
+                <span class="symbol">♡</span>
+                <span></span>
+            </div>
+
+            <!-- Short romantic message -->
+            <p class="message">
+                With joyful hearts we invite you to celebrate the beginning of our forever.
+            </p>
+
+
+
+        </div>
+
     </section>
 
 </body>

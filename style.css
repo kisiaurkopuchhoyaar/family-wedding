@@ -1,8 +1,27 @@
-@import "https://unpkg.com/open-props";
-
-/* optional imports that use the props */
-@import "https://unpkg.com/open-props/normalize.min.css";
-@import "https://unpkg.com/open-props/buttons.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
+@font-face {
+  font-family: "GiornataRegular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("https://files.jcink.net/uploads/jemskinz/fonts/GiornataRegular.woff")
+    format("woff");
+}
+@font-face {
+  font-family: "Century Gothic";
+  font-style: normal;
+  font-weight: normal;
+  src: url("https://files.jcink.net/uploads2/cyracodes/fonts/centurygothic.ttf");
+}
+@property --g {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 20%;
+}
+@property --d {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 80%;
+}
 @property --sgn {
   syntax: "<integer>";
   initial-value: 0;
@@ -36,16 +55,184 @@
     close
   );
   color-scheme: light;
+  interpolate-size: allow-keywords;
 }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
 html {
   --s: 0.5em;
   box-sizing: border-box;
   padding: var(--s);
   height: 100dvh;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  block-size: 100%;
   container-type: size;
   color-scheme: light;
+  scroll-behavior: smooth;
+}
+html:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background-color: oklch(25% 0.12 25);
+
+  /* COMPLEX REPEATING GRADIENTS FOR VELVET FOLDS & CINEMATIC LIGHTING 
+    
+    1.  Main fold texture: A repeating pattern of deep shadows, soft highlights,
+        and high-chroma "peak" reds for an ultra-realistic, slightly unsettling look.
+  */
+  background-image:
+    /* Layer 1: Horizontal Vignette (simulating stage lighting focus) */
+    radial-gradient(
+      ellipse at center,
+      oklch(100% 0 0 / 0) 0%,
+      oklch(0% 0 0 / 0.6) 100%
+    ),
+    /* Layer 2: Main Curtain Folds - Dense & Repeating */
+    repeating-linear-gradient(
+        to right,
+        /* The deepest fold shadow */ oklch(5% 0.05 25) 0px,
+        oklch(5% 0.05 25) 10px,
+
+        /* Gradual transition into the deep velvet red */ oklch(15% 0.1 25) 20px,
+
+        /* The main, deep red of the curtain */ oklch(25% 0.15 25) 40px,
+        oklch(25% 0.15 25) 60px,
+
+        /* High-Chroma, HDR-style 'Peak Red' highlight 
+         (pushing saturation for that hyper-real, uncanny feel) */
+        oklch(45% 0.3 25) 70px,
+
+        /* Gradual transition back to main deep red */ oklch(25% 0.15 25) 80px,
+
+        /* Gradual transition to shadow */ oklch(15% 0.1 25) 100px,
+
+        /* The deepest fold shadow again, to complete the fold */
+        oklch(5% 0.05 25) 110px,
+        oklch(5% 0.05 25) 120px
+      ),
+    /* Layer 3: Vertical Shadows (simulating hanging weight) */
+    linear-gradient(
+        to bottom,
+        oklch(0% 0 0 / 0.5) 0%,
+        oklch(0% 0 0 / 0) 20%,
+        oklch(0% 0 0 / 0) 80%,
+        oklch(0% 0 0 / 0.5) 100%
+      );
+
+  /* Set the background-size to allow the repeating folds to cover the screen */
+
+  pointer-events: none;
+  animation: reveal 6s 1.5s both;
+}
+@keyframes reveal {
+  0% {
+    background-size: 25vw 100%;
+    background-position: 0vw 0;
+    clip-path: shape(
+      from 0 100%,
+      vline to 0%,
+      curve to 4.29% 0% with 2.86% 0%,
+      curve to 7.14% 0% with 5.71% 0%,
+      curve to 10% 0% with 8.57% 0%,
+      curve to 12.86% 0% with 11.43% 0%,
+      curve to 15.71% 0% with 14.29% 0%,
+      curve to 18.57% 0% with 17.14% 0%,
+      curve to 21.43% 0% with 20% 0%,
+      curve to 24.29% 0% with 22.86% 0%,
+      curve to 27.14% 0% with 25.71% 0%,
+      curve to 30% 0% with 28.57% 0%,
+      curve to 32.86% 0% with 31.43% 0%,
+      curve to 35.71% 0% with 34.29% 0%,
+      curve to 38.57% 0% with 37.14% 0%,
+      curve to 41.43% 0% with 40% 0%,
+      curve to 44.29% 0% with 42.86% 0%,
+      curve to 47.14% 0% with 45.71% 0%,
+      curve to 50% 0% with 48.57% 0%,
+      curve to 52.86% 0% with 51.43% 0%,
+      curve to 55.71% 0% with 54.29% 0%,
+      curve to 58.57% 0% with 57.14% 0%,
+      curve to 61.43% 0% with 60% 0%,
+      curve to 64.29% 0% with 62.86% 0%,
+      curve to 67.14% 0% with 65.71% 0%,
+      curve to 70% 0% with 68.57% 0%,
+      curve to 72.86% 0% with 71.43% 0%,
+      curve to 75.71% 0% with 74.29% 0%,
+      curve to 78.57% 0% with 77.14% 0%,
+      curve to 81.43% 0% with 80% 0%,
+      curve to 84.29% 0% with 82.86% 0%,
+      curve to 87.14% 0% with 85.71% 0%,
+      curve to 90% 0% with 88.57% 0%,
+      curve to 92.86% 0% with 91.43% 0%,
+      curve to 95.71% 0% with 94.29% 0%,
+      curve to 100% 0% with 97.14% 0%,
+      vline to 100%,
+      hline to 0
+    );
+  }
+  to {
+    background-size: 15vw 100%;
+    /* Shift the gradient to make it feel like it's swaying/rolling */
+    background-position: -5vw 0;
+    translate: 0 110%;
+    clip-path: shape(
+      from 0 100%,
+      vline to 50%,
+      curve to 4.29% 36% with 2.86% 68%,
+      curve to 7.14% 26% with 5.71% 4%,
+      curve to 10% 51.5% with 8.57% 48%,
+      curve to 12.86% 27.5% with 11.43% 55%,
+      curve to 15.71% 31% with 14.29% 0%,
+      curve to 18.57% 39.5% with 17.14% 62%,
+      curve to 21.43% 57.5% with 20% 17%,
+      curve to 24.29% 53.5% with 22.86% 98%,
+      curve to 27.14% 38.5% with 25.71% 9%,
+      curve to 30% 69% with 28.57% 68%,
+      curve to 32.86% 67.5% with 31.43% 70%,
+      curve to 35.71% 52.5% with 34.29% 65%,
+      curve to 38.57% 52% with 37.14% 40%,
+      curve to 41.43% 49% with 40% 64%,
+      curve to 44.29% 65.5% with 42.86% 34%,
+      curve to 47.14% 84% with 45.71% 97%,
+      curve to 50% 58% with 48.57% 71%,
+      curve to 52.86% 67.5% with 51.43% 45%,
+      curve to 55.71% 88.5% with 54.29% 90%,
+      curve to 58.57% 67.5% with 57.14% 87%,
+      curve to 61.43% 63.5% with 60% 48%,
+      curve to 64.29% 72.5% with 62.86% 79%,
+      curve to 67.14% 52% with 65.71% 66%,
+      curve to 70% 47.5% with 68.57% 38%,
+      curve to 72.86% 37% with 71.43% 57%,
+      curve to 75.71% 32% with 74.29% 17%,
+      curve to 78.57% 66% with 77.14% 47%,
+      curve to 81.43% 61% with 80% 85%,
+      curve to 84.29% 42% with 82.86% 37%,
+      curve to 87.14% 69.5% with 85.71% 47%,
+      curve to 90% 91.5% with 88.57% 92%,
+      curve to 92.86% 71.5% with 91.43% 91%,
+      curve to 95.71% 32% with 94.29% 52%,
+      curve to 100% 50% with 97.14% 12%,
+      vline to 100%,
+      hline to 0
+    );
+  }
 }
 body {
+  min-block-size: 100%;
   margin: 0;
   font-family: sans-serif;
   --w: 100cqw;
@@ -61,6 +248,7 @@ body {
   height: 400svh;
   overflow: clip;
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 .grid {
@@ -146,4 +334,8 @@ section {
   justify-content: center;
   align-items: center;
   height: 100svh;
+  scroll-snap-align: center;
+
+  place-content: center;
+  place-self: center;
 }
