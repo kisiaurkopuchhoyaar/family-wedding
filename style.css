@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Playfair:opsz,wght@5..1200,300..900&display=swap");
 @font-face {
   font-family: "GiornataRegular";
   font-style: normal;
@@ -31,6 +32,12 @@
   syntax: "<number>";
   inherits: false;
   initial-value: 1;
+}
+@property --a {
+  /* needed to animate conic-gradient angle */
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: true;
 }
 :root {
   --space: 1;
@@ -353,11 +360,11 @@ section {
   align-items: center;
   width: 99vw;
   overflow: clip;
-  height: 100svh;
+  min-height: 100svh;
   scroll-snap-align: center;
 
-  place-content: center;
-  place-self: center;
+  flex-wrap: wrap; /* prevent overflow */
+  gap: 1.25em;
 }
 .wedding-announcement {
   padding: 0.3em max(1em, 50cqw - 800px/2);
@@ -553,4 +560,100 @@ section {
     opacity: 1;
     transform: translateX(0%) scaleX(1);
   }
+}
+
+.card {
+  --list: #65587f 25%, #f18867 25% 50%, #e85f99 50% 75%, #50bda1 75%;
+  --b: 0.5vmin; /* desired border width */
+  --r: 1em; /* corner rounding = border-radius */
+  --t: 8s; /* segment rotation animation duration */
+  /* only reserve space for border, so it's transparent */
+  border: solid var(--b) #0000;
+  border-radius: 5px;
+  corner-shape: notch;
+  /* remove if semi-transparent background not needed */
+  /* replace with desired semi-transparent background otherwise */
+
+  --grad: conic-gradient(from var(--a), var(--list));
+  animation: a var(--t) linear infinite;
+  /* 	background:   */
+  /* layer an opaque cover restricted to padding-box */
+  /* 		linear-gradient(oklch(0.8398 0.0222 123.35) 0 0) padding-box,  */
+  /* on top of gradient seen through transparent border */
+  /* 		var(--grad) border-box; */
+  background: url(https://i.pinimg.com/1200x/46/ad/0c/46ad0c4930438db5e3cab25f2ae68282.jpg)
+    50% / cover;
+  position: relative; /* needed for pseudo */
+  /* outline: 1vmin ridge
+    color-mix(in oklab, oklch(0.7 0.1677 52.41), transparent 25%);
+  outline-offset: 0.2vmin;
+  filter: drop-shadow(
+      0 0 1dvw
+        color-mix(
+          in oklab,
+          light-dark(transparent, oklch(0.7 0.1677 52.41)),
+          transparent 5%
+        )
+    )
+    drop-shadow(
+      0 0 5dvw
+        color-mix(
+          in oklab,
+          light-dark(transparent, oklch(0.7 0.1677 52.41)),
+          transparent 25%
+        )
+    ); */
+
+  &::before {
+    border: solid var(--b) #0000;
+    border-radius: 5px;
+    corner-shape: notch;
+    position: absolute;
+    /* origin is padding-box limit; 
+		 * go outside (negative direction) by a border width */
+    inset: calc(-1 * var(--b));
+    /* inherit both of these */
+    border: inherit;
+    border-radius: inherit;
+    background: var(--grad) border-box;
+    /* simple opaque rectangle for mask
+		 * anything opaque will do; using red as only 3 chars*/
+    --full: conic-gradient(red 0 0);
+    /* exclude (mask out) padding box area */
+    mask:
+      var(--full) exclude,
+      var(--full) padding-box;
+    /* prevent it from catching clicks */
+    pointer-events: none;
+    content: "";
+  }
+}
+@keyframes a {
+  to {
+    --a: 1turn;
+  }
+}
+
+@keyframes a {
+  to {
+    --a: 1turn;
+  }
+}
+.wedding-events-section {
+  justify-content: space-around;
+}
+.card {
+  width: max(12em, 25vw);
+  aspect-ratio: 3/ 4;
+  display: grid;
+  place-content: center;
+  gap: 1.3em;
+  place-self: center;
+  padding: 1em;
+  text-align: center;
+}
+.card-body {
+  font:
+    900 3em/1.125 playfair,
+    serif;
 }
