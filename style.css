@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mansalva&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Playfair:opsz,wght@5..1200,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yatra+One&display=swap");
+@import url(https://fonts.bunny.net/css?family=uncial-antiqua:400);
 @font-face {
   font-family: "GiornataRegular";
   font-style: normal;
@@ -433,10 +435,11 @@ section {
   
 } */
 .message {
-  font-size: clamp(1.1rem, 3vw, 1.45rem);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.1rem, 3vw, 1.85rem);
   font-style: italic;
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.2;
   text-wrap: balance;
   text-align: center;
 }
@@ -643,17 +646,109 @@ section {
   justify-content: space-around;
 }
 .card {
+  isolation: isolate;
   width: max(12em, 25vw);
   aspect-ratio: 3/ 4;
   display: grid;
   place-content: center;
-  gap: 1.3em;
+  gap: 2.3em;
   place-self: center;
   padding: 1em;
   text-align: center;
 }
+.event-title,
+.event-title-hindi {
+  font-family: "Yatra One", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes combine {
+  to {
+    filter: blur(10px) contrast(30);
+  }
+}
 .card-body {
-  font:
-    900 3em/1.125 playfair,
-    serif;
+  display: grid;
+  place-items: center;
+  animation: combine 4s linear infinite;
+  /* blur and contrast (up and down) with the intervals the h1s crossfade */
+  animation-timing-function: linear(0, 0 45%, 1 50%, 0 55% 90%, 1 95%, 0 100%);
+  h3 {
+    font-size: clamp(1.8em, 4vw, 3.3em);
+    color: #c5a059;
+
+    /* Use a deeper, darker crimson for the stroke to provide contrast against the white background */
+    -webkit-text-stroke: 2px #600018;
+    paint-order: stroke fill;
+
+    /* A very soft crimson/maroon shadow to tie it back to the wedding theme */
+    filter: drop-shadow(0px 4px 10px rgba(128, 0, 32, 0.15));
+
+    letter-spacing: 3px;
+    white-space: nowrap;
+    text-box: trim-start cap alphabetic;
+    animation: fade 4s linear infinite;
+    /* be opacity 1 until 45%, 45%-55% fade out and hold til 90%, come back in for last 10% */
+    animation-timing-function: linear(1 45%, 0 55% 90%, 1 100%);
+
+    &:nth-child(2) {
+      /* be opacity 0 until 45%, 45%-55% fade in and hold til 90%, go back out */
+      animation-timing-function: linear(0 45%, 1 55% 90%, 0 100%);
+    }
+  }
+
+  > * {
+    grid-area: 1 / 1;
+  }
+}
+.date-number {
+  margin-block-end: 1em;
+  font-size: clamp(2.5em, 4vw, 3.5em);
+  font-family: "Uncial Antiqua", display;
+  color: oklch(26.716% 0.04723 218.193);
+  width: 2ch;
+  aspect-ratio: 1;
+  place-self: center;
+
+  display: flex;
+  place-items: center;
+  place-content: center;
+
+  background: oklch(20.362% 0.05199 247.653);
+  color: white;
+  text-box: cap alphabetic;
+  border-radius: 1e3px;
+  corner-shape: squircle;
+  border: none;
+
+  position: relative;
+
+  &::before {
+    --vibrance: 80%;
+    content: " ";
+    position: absolute;
+    inset: 0 0 -10px;
+    background: linear-gradient(
+      to right in oklch longer hue,
+      oklch(95% var(--vibrance) 0) 0 100%
+    );
+    filter: blur(10px);
+    border-radius: inherit;
+    z-index: -1;
+  }
+}
+.date-details {
+  font-size: clamp(1.4em, 2vw, 2.9em);
+  /* font-family: "Uncial Antiqua", display; */
+  font-family: "Dancing Script", cursive;
 }
