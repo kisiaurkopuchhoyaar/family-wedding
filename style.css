@@ -752,3 +752,178 @@ section {
   /* font-family: "Uncial Antiqua", display; */
   font-family: "Dancing Script", cursive;
 }
+/* ============================================= */
+/* MODERN 2026 MARQUEE GALLERY – PURE CSS + PERFORMANCE MAGIC */
+/* ============================================= */
+
+.photo-gallery {
+  --gap: clamp(12px, 2vw, 24px);
+
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.marquee-strip {
+  --item-width: clamp(220px, 28vw, 340px); /* fully responsive thumbnail size */
+
+  container-type: inline-size; /* modern container queries */
+  overflow: hidden;
+  contain: layout paint; /* 🔥 isolates rendering – huge perf win */
+  content-visibility: auto; /* skips painting when off-screen */
+  padding-block: 1rem;
+  width: 100%;
+  flex: 0 0 auto;
+  align-self: center;
+  mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+}
+
+.marquee-track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content; /* allows duplication to work perfectly */
+  animation: marquee 70s linear infinite;
+  will-change: transform; /* forces GPU acceleration */
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+:nth-child(2 of .marquee-strip) .marquee-track {
+  animation-direction: reverse;
+}
+
+/* Seamless infinite loop (because we duplicated the items) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  } /* exactly half because of duplication */
+}
+.marquee-strip:last-child .gallery-item {
+  img {
+    width: min(16em, 50vw);
+
+    object-fit: contain;
+    rotate: calc(var(--sign, 1) * 2deg);
+
+    &:nth-child(3n + 1) {
+      --sign: -1;
+    }
+  }
+}
+/* Responsive image card */
+.gallery-item {
+  flex-shrink: 0;
+  width: var(--item-width);
+  content-visibility: auto; /* extra perf – only renders when near viewport */
+  contain: layout paint; /* isolates each card */
+}
+
+.gallery-item picture {
+  display: block;
+  width: 100%;
+  aspect-ratio: 800 / 533; /* exact thumbnail ratio – zero layout shift */
+  border-radius: 12px;
+  corner-shape: squircle;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Pause on hover + accessibility */
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-play-state: paused !important;
+  }
+}
+
+.threed-marquee-gallery {
+  display: grid;
+  overflow: hidden;
+  perspective: 35em;
+  mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+  width: 100%;
+  flex: 0 0 auto;
+  align-self: center;
+}
+.scene {
+  display: grid;
+  place-self: center /* middle align */;
+  /* don't flatten 3D transformed children 
+	 * of this parent having its own 3D transform */
+  transform-style: preserve-3d;
+  animation: ry 32s linear infinite;
+}
+@keyframes ry {
+  to {
+    rotate: y 1turn;
+  }
+}
+.scene .gallery-item {
+  --w: 37.5em;
+  /* compute base angle corresponding to a card */
+  --ba: 1turn/sibling-count();
+  grid-area: 1/1;
+  width: var(--w);
+  aspect-ratio: 7/ 10;
+  object-fit: cover;
+  border-radius: 1.5em;
+  /* don't want to see back of cards in front of screen plane */
+  backface-visibility: hidden;
+  /* need to use a transform chain here, cannot use separate 
+	 * rotate & translate properties because they'd be applied 
+	 * in wrong order (translate, then rotate) for what we need */
+  transform: 
+		/* rotate around y axis; in the future: sibling-index() */ rotatey(
+      calc(sibling-index() * var(--ba))
+    )
+    /* only after that translate along z axis with minus */
+    translatez(calc(-1 * (0.5 * var(--w) + 0.5em) / tan(0.5 * var(--ba))));
+}
+
+.icon {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  translate: -50% 0;
+  display: block;
+  opacity: 1;
+  color: oklch(41.582% 0.08406 92.59 / 0.75);
+  display: none;
+  animation-name: mouse;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-timeline: scroll();
+
+  @supports (animation-timeline: scroll()) {
+    display: grid;
+    place-items: center;
+    gap: 5px;
+    &::before {
+      content: "Scroll";
+      font-size: 0.7rem;
+      text-align: center;
+      text-wrap: balance;
+      background-blend-mode: screen;
+    }
+  }
+}
+@keyframes mouse {
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
