@@ -18,6 +18,11 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Unbounded:wght@300;400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+    <head>
+        <script src="script.js" defer></script>
+    </head>
+
 </head>
 
 <body>
@@ -35,6 +40,20 @@
 
             <fedisplacementmap in2="noise" in="SourceGraphic" scale="15"></fedisplacementmap>
         </filter>
+    </svg>
+    <svg width="0" height="0" aria-hidden="true">
+
+        <filter id="shadow">
+            <feTurbulence type="fractalNoise" baseFrequency="7.13" result="map"></feTurbulence>
+            <!-- SourceAlpha because Firefox bug-->
+            <feMorphology in="SourceAlpha" operator="dilate" radius="3"></feMorphology>
+            <feGaussianBlur stdDeviation="8"></feGaussianBlur>
+            <feOffset dx="9" dy="13"></feOffset>
+            <feDisplacementMap in2="map" scale="16" yChannelSelector="R"></feDisplacementMap>
+            <feComposite in="SourceAlpha" operator="out"></feComposite>
+            <feBlend in2="SourceGraphic" mode="multiply"></feBlend>
+        </filter>
+
     </svg>
     <div class="scroll-container">
         <div class="grid">
@@ -118,7 +137,7 @@
             </figure>
         </div>
     </div>
-    <section class="wedding-announcement" aria-labelledby="wedding-title">
+    <section class="wedding-announcement" aria-labelledby="wedding-title" data-text="ᬒᬁ श्री गणेशाय नम ᬒᬁ">
 
         <div class="announcement-container">
 
@@ -148,9 +167,9 @@
 
             <!-- Elegant divider with heart symbol -->
             <div class="divider" aria-hidden="true">
-                <span></span>
+
                 <span class="symbol">♡</span>
-                <span></span>
+
             </div>
 
             <!-- Short romantic message -->
@@ -168,7 +187,9 @@
 
         <article class="card">
             <header class="card-date-header">
-                <time datetime="2026-04-10" class="date-number">19</time>
+                <time datetime="2026-04-10" class="date-number">
+                    19
+                </time>
                 <div class="date-details">
                     <span class="month">April </span>
                     <span class="day">Sunday</span>
@@ -183,7 +204,9 @@
 
         <article class="card">
             <header class="card-date-header">
-                <time datetime="2026-04-11" class="date-number">20</time>
+                <time datetime="2026-04-11" class="date-number">
+                    20
+                </time>
                 <div class="date-details">
                     <span class="month">April </span>
                     <span class="day">Monday</span>
@@ -199,7 +222,9 @@
 
         <article class="card">
             <header class="card-date-header">
-                <time datetime="2026-04-12" class="date-number">21</time>
+                <time datetime="2026-04-12" class="date-number">
+                    21
+                </time>
                 <div class="date-details">
                     <span class="month">April </span>
                     <span class="day">Tuesday</span>

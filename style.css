@@ -63,12 +63,7 @@
     curve to 73.97% 12.4% with 92.11% 20.66% / 83.99% 12.4%,
     close
   );
-  --root-color: #74e721;
-  --start-stop: 7.5;
-  --end-stop: 5.6;
-  --opa-start-pct: 60;
-  --opa-mid-pct: 20;
-  --opa-end-pct: 55;
+
   color-scheme: light;
   interpolate-size: allow-keywords;
 }
@@ -324,6 +319,7 @@ body {
       height: 100%;
       object-fit: cover;
       object-position: center top;
+      filter: url(#shadow);
     }
     #jodino1 {
       position: absolute;
@@ -384,7 +380,6 @@ section {
       )
       var(--o) var(--o),
     conic-gradient(from 90deg at 1px 1px, #0000 25%, var(--line-c) 0%);
-  height: 100svh;
 }
 .announcement-container {
   /*   background-image: var(--gradient-28); */
@@ -494,8 +489,8 @@ section {
   display: flex;
   align-items: center;
   flex: 1;
-
-  width: 100%;
+  /* padding: 0.3em max(1em, 50cqw - 800px/2); */
+  width: 100vw;
 
   margin-block: 1em;
 }
@@ -712,29 +707,65 @@ section {
     grid-area: 1 / 1;
   }
 }
+
 .date-number {
+  display: grid;
+  place-items: center;
+  padding-bottom: 0.5em;
+
   margin-block-end: 1em;
   font-size: clamp(2.5em, 4vw, 3.5em);
   font-family: "Uncial Antiqua", display;
   color: oklch(26.716% 0.04723 218.193);
-  width: 2ch;
+  width: 3em;
   aspect-ratio: 1;
-  place-self: center;
+  padding: 0.6em;
 
-  display: flex;
-  place-items: center;
-  place-content: center;
-
-  background: oklch(20.362% 0.05199 247.653);
-  color: white;
-  text-box: cap alphabetic;
   border-radius: 1e3px;
+  text-box: cap alphabetic;
+  text-box-trim: trim-both;
+
+  /* Tells the browser to use the top of the capital letters as the edge */
+  text-box-edge: cap;
+
+  letter-spacing: -0.05em;
   corner-shape: squircle;
-  border: none;
+
+  /* Deep midnight/velvet blue */
+  --bg-color: oklch(0.35 0.08 260);
+  /* Crisp, starlight-silver stroke */
+  --stroke-color: oklch(0.9 0.02 260);
+  /* Pitch-black navy shadow for maximum depth */
+  --shadow-color: oklch(0.15 0.05 260); /* Near-black maroon for crisp depth */
+
+  background: var(--bg-color);
+  color: white;
+
+  /* --- 4. FLUID STROKES & SHADOWS --- */
+  /* Switched px to em so they grow/shrink perfectly with the clamp() font-size */
+  -webkit-text-stroke: 0.03em var(--stroke-color);
+  text-shadow: 0.05em 0.05em 0 var(--shadow-color);
+  paint-order: stroke fill;
+
+  border-shape: shape(
+    from 50% 91%,
+    line to 90% 50%,
+    arc to 50% 9% of 1%,
+    arc to 10% 50% of 1%,
+    close
+  );
+  border: 1mm solid #c5a059;
 
   position: relative;
 
   &::before {
+    border-shape: shape(
+      from 50% 91%,
+      line to 90% 50%,
+      arc to 50% 9% of 1%,
+      arc to 10% 50% of 1%,
+      close
+    );
     --vibrance: 80%;
     content: " ";
     position: absolute;
