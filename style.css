@@ -63,7 +63,16 @@
     curve to 73.97% 12.4% with 92.11% 20.66% / 83.99% 12.4%,
     close
   );
+  --root-color: oklch(0.7 0.1302 353.22);
+  --start-stop: 7.5;
 
+  --end-stop: 5.6;
+
+  --opa-start-pct: 60;
+
+  --opa-mid-pct: 20;
+
+  --opa-end-pct: 55;
   color-scheme: light;
   interpolate-size: allow-keywords;
 }
